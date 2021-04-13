@@ -10,7 +10,8 @@ function deepClone1(obj){
 //for...in
 function deepClone2(obj){
     //obj为空对象或不是对象
-    if(!obj || typeof obj !='object') return obj;
+    if(obj===null || typeof obj !='object') return obj;
+    //正则
     if(obj instanceof RegExp) return new RegExp(obj);
     const cloneObj=new obj.constructor;
     for(let key in obj){

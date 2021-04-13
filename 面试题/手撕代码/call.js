@@ -1,12 +1,28 @@
 //实现call
 
-Function.prototype.myCall=function(context){
-    //context=context||window;//兼容传入null
-    console.log(this);//this指向本函数
-    context.fn=this;//绑定this
-    let args=[...arguments].slice(1);
+Object.prototype.myCall=function(){
+    let [context,...args]=[...arguments];
+    
+    context=context||window;
+
+    context.fn=this;
+
     let result=context.fn(...args);
+
+    delete context.fn;
+
     return result;
 }
 
-Array.prototype.shift.myCall(null);
+let obj={
+    name:'zzg',
+    say:function(){
+        return this.name;
+    }
+}
+
+let obj1={
+    name:'wax',
+}
+
+console.log(obj.say.myCall(obj1));
